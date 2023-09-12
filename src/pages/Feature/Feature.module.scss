@@ -1,0 +1,67 @@
+.feature_container {
+  .head {
+    padding: 2rem;
+    height: 30rem;
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .searchBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0;
+
+    label {
+      display: flex;
+      width: 32.8125rem;
+      padding: 0.375rem 0.625rem;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0.375rem;
+      border: 2px solid #d1d5db;
+
+      img {
+        background-color: #000;
+        padding: 0.3rem;
+        border-radius: 50%;
+      }
+
+      input {
+        width: 100%;
+        background-color: transparent;
+        color: #000;
+        font-family: inherit;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem; /* 150% */
+        border: none;
+
+        &::placeholder {
+          color: #000;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .movie_deck {
+    max-width: 79vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    margin-top: 2.75rem;
+  }
+}
