@@ -1,0 +1,29 @@
+.searchBar {
+  label {
+    display: flex;
+    width: 32.8125rem;
+    padding: 0.375rem 0.625rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.375rem;
+    border: 2px solid #d1d5db;
+    input {
+      width: 100%;
+      background-color: transparent;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5rem; /* 150% */
+      border: none;
+
+      &::placeholder {
+        color: #fff;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
