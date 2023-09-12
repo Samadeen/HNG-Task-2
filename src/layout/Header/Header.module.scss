@@ -1,0 +1,14 @@
+.header {
+  max-width: 90rem;
+  margin: 0 auto;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .sign_in {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
