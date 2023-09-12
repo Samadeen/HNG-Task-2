@@ -1,0 +1,78 @@
+import axios from 'axios';
+import { ReactNode, createContext, useEffect, useState } from 'react';
+
+type MovieProviderProps = {
+  children: ReactNode;
+};
+
+interface Movie {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  imdb_id: string | null;
+}
+
+interface MovieContextType {
+  movies: Movie[] | null;
+  searchMovies: Movie[] | null;
+  setSearchMovies: React.Dispatch<React.SetStateAction<Movie[] | null>>; // Update the type
+}
+
+export const MovieContext = createContext<MovieContextType | null>(null);
+
+export const MovieProvider = ({ children }: MovieProviderProps) => {
+  const [movies, setMovies] = useState<Movie[] | null>(null);
+  const [searchMovies, setSearchMovies] = useState<Movie[] | null>(null);
+
+  useEffect(() => {
+    axios
+      .get<{ results: Movie[] }>(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${
+          import.meta.env.VITE_DB_KEY
+        }`
+      )
+      .then(async (res) => {
+        // Fetch IMDb ID for each movie
+        const moviesWithImdbId = await Promise.all(
+          res.data.results.map(async (movie) => {
+            const imdbResponse = await axios.get(
+              `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${
+                import.meta.env.VITE_DB_KEY
+              }`
+            );
+            movie.imdb_id = imdbResponse.data.imdb_id || null;
+            return movie;
+          })
+        );
+
+        setMovies(moviesWithImdbId);
+        setSearchMovies(moviesWithImdbId);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(movies);
+
+  if (movies === null && searchMovies === null) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <MovieContext.Provider value={{ movies, searchMovies, setSearchMovies }}>
+      {children}
+    </MovieContext.Provider>
+  );
+};
