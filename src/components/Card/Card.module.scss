@@ -1,0 +1,70 @@
+.card_container {
+  height: 32.06rem;
+  width: 15.625rem;
+
+  .images {
+    position: relative;
+    img {
+      width: 15.625rem;
+      height: 23.125rem;
+    }
+
+    svg {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+      transition: all 0.5s ease-in;
+
+      &:hover {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .loc {
+    p {
+      color: #9ca3af;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      margin: 0.75rem 0;
+    }
+
+    h3 {
+      color: #111827;
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.75rem 0;
+
+      .rate_tab {
+        display: flex;
+        align-items: center;
+        gap: 0.62rem;
+      }
+    }
+
+    .genre {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      p {
+        color: #9ca3af;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+    }
+  }
+}
