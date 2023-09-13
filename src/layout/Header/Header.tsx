@@ -10,14 +10,19 @@ interface ShowProps {
 
 const Header = ({ show }: ShowProps) => {
   return (
-    <header className={styles.header}>
+    <m.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.5, type: 'spring', stiffness: 150 }}
+      className={styles.header}
+    >
       <m.img src={logo} alt='logo' />
       {show && <Searchbar />}
       <div className={styles.sign_in}>
         <p>Sign in</p>
         <img src={menu} alt='menu icon' />
       </div>
-    </header>
+    </m.header>
   );
 };
 
