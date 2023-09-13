@@ -3,6 +3,7 @@ import imdb from '../../assets/imdb.svg';
 import tomato from '../../assets/tomato.svg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {motion as m} from 'framer-motion'
 
 interface CardProps {
   poster_path: string;
@@ -64,11 +65,14 @@ const Card: React.FC<CardProps> = ({
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
-  console.log(id);
 
   return (
     <Link to={`./movies/${id}`} data-testid: movie-card>
-      <div className={styles.card_container}>
+      <m.div 
+              initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.3 }}
+       className={styles.card_container}>
         <div className={styles.images}>
           <img src={imagePath + poster_path} alt={original_title} data-testid: movie-poster />
           <svg
@@ -139,7 +143,7 @@ const Card: React.FC<CardProps> = ({
             {genreNames.map((genre) => <p key={genre}>{genre} </p>).slice(0, 4)}
           </div>
         </div>
-      </div>
+      </m.div>
     </Link>
   );
 };
