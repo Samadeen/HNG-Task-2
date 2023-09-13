@@ -6,9 +6,18 @@
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .sign_in {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
   }
 }
