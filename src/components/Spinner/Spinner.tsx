@@ -1,15 +1,6 @@
-import { useContext } from 'react';
 import './Spinner.css';
-import { MovieContext } from '../../api/movie-api';
 
 const Spinner = () => {
-  // const movieContext = useContext(MovieContext);
-
-  // if (!movieContext || !movieContext.error) {
-  //   return <Spinner />;
-  // }
-  // const err = movieContext.error;
-
   return (
     <div className='smiley_container'>
       <svg
@@ -106,7 +97,6 @@ const Spinner = () => {
           </g>
         </g>
       </svg>
-      {/* <div className='error'>{err}</div> */}
     </div>
   );
 };
