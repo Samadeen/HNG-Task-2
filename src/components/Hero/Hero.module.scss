@@ -8,6 +8,14 @@
   color: #fff;
   padding: 0.94rem 5.94rem;
 
+  @media (max-width: 1000px) {
+    padding: 0.94rem 4rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0.94rem 1.5rem;
+  }
+
   .hero_wrapper {
     display: flex;
     align-items: center;
@@ -17,6 +25,10 @@
     .details {
       width: 35.25rem;
       margin: 5.81rem 0;
+
+      @media (max-width: 500px) {
+        margin: 2.81rem 0;
+      }
       h1 {
         font-size: 3rem;
         font-style: normal;
@@ -65,6 +77,10 @@
     }
     .numbers {
       transform: translateX(3rem);
+
+      @media (max-width: 500px) {
+        display: none;
+      }
       p {
         color: #9ca3af;
         font-size: 1.25rem;
