@@ -14,6 +14,7 @@ import logout from '../../assets/Logout.svg';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/Spinner/Spinner';
+import {motion as m} from 'framer-motion'
 
 interface Movie {
   adult: boolean;
@@ -106,6 +107,8 @@ const Movie = () => {
    const date = new Date(movie?.release_date);
   const utcDate = new Date(date);
 
+
+
   return (
     <section className={styles.movie_container}>
       <div className={styles.sidebar}>
@@ -157,7 +160,11 @@ const Movie = () => {
             <h5>Watch Trailer</h5>
           </div>
         </div>
-        <div className={styles.title}>
+        <m.div         
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, type: 'spring', stiffness: 150,delayChildren: 0.3,staggerChildren: 0.05, }}
+        className={styles.title}>
           <h1 data-testid: movie-title>{movie?.original_title}</h1>
           <span></span>
           <h2 data-testid: movie-release-date >{utcDate.toUTCString()}</h2>
@@ -170,11 +177,15 @@ const Movie = () => {
               return <h3 key={idx}>{genre.name}</h3>;
             })}
           </div>
-        </div>
+        </m.div>
         <div className={styles.description}>
           <div className={styles.describe}>
-            <p data-testid: movie-overview>{movie?.overview}</p>
-            <div className={styles.tributes}>
+            <m.p initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}             transition={{ delay: 1.3, type: 'spring', stiffness: 150 }}
+ data-testid: movie-overview>{movie?.overview}</m.p>
+            <m.div initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 1, type: 'spring', stiffness: 150,delayChildren: 0.3,staggerChildren: 0.05, }} className={styles.tributes}>
               <p>
                 Tagline: <span>{movie?.tagline}</span>
               </p>
@@ -184,7 +195,7 @@ const Movie = () => {
               <p>
                 Budget: <span>{movie?.budget}</span>
               </p>
-            </div>
+            </m.div>
             <div className={styles.buts}>
               <p className={styles.red}>Top rated movie #12</p>
               <p className={styles.not_red}>Awards 9 nominations</p>
