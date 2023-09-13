@@ -48,7 +48,7 @@ const Searchbar = () => {
               ))
             : defaultMovies.map((res, idx) => (
                 <div className={styles.checker} key={idx}>
-                  {query?.length >= 1 ? (
+                  {query!.length >= 1 ? (
                     <div className={styles.found}>
                       <h4 style={{ padding: '2rem' }}>No Movies Found</h4>
                     </div>
