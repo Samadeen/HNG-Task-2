@@ -5,6 +5,7 @@ import play from '../../assets/Play.svg';
 import { useContext, useState } from 'react';
 import { MovieContext } from '../../api/movie-api';
 import Header from '../../layout/Header/Header';
+import Roller from '../Roller/Roller';
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -12,17 +13,17 @@ const Hero = () => {
   const movieContext = useContext(MovieContext);
 
   if (!movieContext || !movieContext.movies) {
-    return <div>Loading...</div>;
+    return <Roller />;
   }
   const movies = movieContext.movies;
-
-  // Use a single state variable to track the active index
 
   const handleNumberClick = (index: number) => {
     setActiveIndex(index);
   };
   const firstSix = movies.slice(0, 6);
   const imagePath = 'https://image.tmdb.org/t/p/original';
+
+  console.log(firstSix[2].backdrop_path);
 
   const randomRating = Math.floor(Math.random() * 26) + 75;
   const randomRatingPercentage = Math.floor(Math.random() * 26) + 75;
