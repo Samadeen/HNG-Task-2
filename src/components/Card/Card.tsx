@@ -24,8 +24,9 @@ const Card: React.FC<CardProps> = ({
   const [toggle, setToggle] = useState(true);
   const randomRatingPercentage: number = Math.floor(Math.random() * 26) + 75;
 
-  const toggleHandler = () => {
+  const toggleHandler = (e: { preventDefault: () => void }) => {
     setToggle((prevState) => !prevState);
+    e.preventDefault();
   };
   // Define a mapping of genre IDs to names
   const genreMap: { [key: number]: string } = {
@@ -66,10 +67,10 @@ const Card: React.FC<CardProps> = ({
   console.log(id);
 
   return (
-    <Link to={`./movies/${id}`}>
+    <Link to={`./movies/${id}`} data-testid: movie-card>
       <div className={styles.card_container}>
         <div className={styles.images}>
-          <img src={imagePath + poster_path} alt={original_title} />
+          <img src={imagePath + poster_path} alt={original_title} data-testid: movie-poster />
           <svg
             onClick={toggleHandler}
             width='30'
@@ -122,8 +123,8 @@ const Card: React.FC<CardProps> = ({
           </svg>
         </div>
         <div className={styles.loc}>
-          <p>{utcDate.toUTCString()}</p>
-          <h3>{original_title}</h3>
+          <p data-testid: movie-release-date>{utcDate.toUTCString()}</p>
+          <h3 data-testid: movie-title>{original_title}</h3>
           <div className={styles.rating}>
             <div className={styles.rate_tab}>
               <img src={imdb} alt='imdb icon' />
