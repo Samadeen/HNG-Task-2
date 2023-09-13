@@ -5,10 +5,25 @@ import { useContext, useState } from 'react';
 import { MovieContext } from '../../api/movie-api';
 import Card from '../../components/Card/Card';
 import Footer from '../../layout/Footer/Footer';
+import { SearchContext } from '../../api/search-api';
 
 const Feature = () => {
   const movieContext = useContext(MovieContext);
+  const searchContext = useContext(SearchContext);
   const [searchValue, setSearchValue] = useState('');
+
+  if (
+    !searchContext ||
+    !searchContext.defaultMovies ||
+    (searchContext.query === null && searchContext.results === null)
+  ) {
+    return <div>Loading...</div>;
+  }
+
+  const { defaultMovies, results, searchMovies, setSearchMovies } =
+    searchContext;
+
+  console.log(results, defaultMovies);
 
   if (
     !movieContext ||
@@ -18,17 +33,16 @@ const Feature = () => {
   ) {
     return <div>Loading....</div>;
   }
-
-  const { movies, searchMovies, setSearchMovies } = movieContext;
+  // const { movies, searchMovies, setSearchMovies } = movieContext;
 
   const onSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
 
     if (!value) {
-      setSearchMovies(movies);
+      setSearchMovies(defaultMovies);
     } else {
-      const filteredMovies = movies.filter((movie) => {
+      const filteredMovies = defaultMovies.filter((movie) => {
         return movie.title.toLowerCase().includes(value.toLowerCase());
       });
       setSearchMovies(filteredMovies);
@@ -45,7 +59,7 @@ const Feature = () => {
           backgroundImage:
             searchMovies && searchMovies[0]
               ? `url(${imagePath + searchMovies[0].backdrop_path})`
-              : `url(${imagePath + movies[0].backdrop_path})`,
+              : `url(${imagePath + defaultMovies[0].backdrop_path})`,
         }}
       >
         <Header show={false} />
