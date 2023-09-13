@@ -14,7 +14,7 @@ import logout from '../../assets/Logout.svg';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/Spinner/Spinner';
-import {motion as m} from 'framer-motion'
+import { motion as m } from 'framer-motion';
 
 interface Movie {
   adult: boolean;
@@ -104,10 +104,8 @@ const Movie = () => {
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
-   const date = new Date(movie?.release_date);
+  const date = new Date(movie?.release_date);
   const utcDate = new Date(date);
-
-
 
   return (
     <section className={styles.movie_container}>
@@ -160,18 +158,25 @@ const Movie = () => {
             <h5>Watch Trailer</h5>
           </div>
         </div>
-        <m.div         
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, type: 'spring', stiffness: 150,delayChildren: 0.3,staggerChildren: 0.05, }}
-        className={styles.title}>
-          <h1 data-testid: movie-title>{movie?.original_title}</h1>
+        <m.div
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            delay: 0.5,
+            type: 'spring',
+            stiffness: 150,
+            delayChildren: 0.3,
+            staggerChildren: 0.05,
+          }}
+          className={styles.title}
+        >
+          <h1 data-testid='movie-title'>{movie?.original_title}</h1>
           <span></span>
-          <h2 data-testid: movie-release-date >{utcDate.toUTCString()}</h2>
+          <h2 data-testid='movie-release-date'>{utcDate.toUTCString()}</h2>
           <span></span>
           <h2>PG-13</h2>
           <span></span>
-          <h2 data-testid: movie-runtime>{movie?.runtime} mins</h2>
+          <h2 data-testid='movie-runtime'>{movie?.runtime} mins</h2>
           <div className={styles.genre}>
             {movie?.genres.map((genre, idx) => {
               return <h3 key={idx}>{genre.name}</h3>;
@@ -180,12 +185,26 @@ const Movie = () => {
         </m.div>
         <div className={styles.description}>
           <div className={styles.describe}>
-            <m.p initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}             transition={{ delay: 1.3, type: 'spring', stiffness: 150 }}
- data-testid: movie-overview>{movie?.overview}</m.p>
-            <m.div initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1, type: 'spring', stiffness: 150,delayChildren: 0.3,staggerChildren: 0.05, }} className={styles.tributes}>
+            <m.p
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 1.3, type: 'spring', stiffness: 150 }}
+              data-testid='movie-overview'
+            >
+              {movie?.overview}
+            </m.p>
+            <m.div
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                delay: 1,
+                type: 'spring',
+                stiffness: 150,
+                delayChildren: 0.3,
+                staggerChildren: 0.05,
+              }}
+              className={styles.tributes}
+            >
               <p>
                 Tagline: <span>{movie?.tagline}</span>
               </p>
