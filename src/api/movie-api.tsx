@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ReactNode, createContext, useEffect, useState } from 'react';
+import Spinner from '../components/Spinner/Spinner';
 
 type MovieProviderProps = {
   children: ReactNode;
@@ -24,6 +25,7 @@ interface Movie {
 }
 
 interface MovieContextType {
+  error: string | null;
   movies: Movie[] | null;
   searchMovies: Movie[] | null;
   setSearchMovies: React.Dispatch<React.SetStateAction<Movie[] | null>>; // Update the type
@@ -34,11 +36,12 @@ export const MovieContext = createContext<MovieContextType | null>(null);
 export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [movies, setMovies] = useState<Movie[] | null>(null);
   const [searchMovies, setSearchMovies] = useState<Movie[] | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
       .get<{ results: Movie[] }>(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${
           import.meta.env.VITE_DB_KEY
         }`
       )
@@ -60,18 +63,21 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         setSearchMovies(moviesWithImdbId);
       })
       .catch((error) => {
-        console.log(error);
+        console.error('Error fetching top-rated movies:', error);
+        setError(error); // Set the error state variable
       });
   }, []);
 
   console.log(movies);
 
   if (movies === null && searchMovies === null) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
-    <MovieContext.Provider value={{ movies, searchMovies, setSearchMovies }}>
+    <MovieContext.Provider
+      value={{ error, movies, searchMovies, setSearchMovies }}
+    >
       {children}
     </MovieContext.Provider>
   );
