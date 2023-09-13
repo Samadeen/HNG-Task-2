@@ -13,6 +13,7 @@ import logo_black from '../../assets/Logo-black.svg';
 import logout from '../../assets/Logout.svg';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface Movie {
   adult: boolean;
@@ -30,7 +31,8 @@ interface Movie {
   poster_path: string;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
-  release_date: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  release_date: any;
   revenue: number;
   runtime: number;
   spoken_languages: SpokenLanguage[];
@@ -91,7 +93,7 @@ const Movie = () => {
   console.log(movie);
 
   if (!movieContext || !movieContext.movies) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   const movies = movieContext.movies;
 
@@ -100,6 +102,9 @@ const Movie = () => {
   const randomThree = Math.floor(Math.random() * 10) + 10;
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
+
+   const date = new Date(movie?.release_date);
+  const utcDate = new Date(date);
 
   return (
     <section className={styles.movie_container}>
@@ -153,13 +158,13 @@ const Movie = () => {
           </div>
         </div>
         <div className={styles.title}>
-          <h1>{movie?.original_title}</h1>
+          <h1 data-testid: movie-title>{movie?.original_title}</h1>
           <span></span>
-          <h2>{movie?.release_date}</h2>
+          <h2 data-testid: movie-release-date >{utcDate.toUTCString()}</h2>
           <span></span>
           <h2>PG-13</h2>
           <span></span>
-          <h2>{movie?.runtime} mins</h2>
+          <h2 data-testid: movie-runtime>{movie?.runtime} mins</h2>
           <div className={styles.genre}>
             {movie?.genres.map((genre, idx) => {
               return <h3 key={idx}>{genre.name}</h3>;
@@ -168,7 +173,7 @@ const Movie = () => {
         </div>
         <div className={styles.description}>
           <div className={styles.describe}>
-            <p>{movie?.overview}</p>
+            <p data-testid: movie-overview>{movie?.overview}</p>
             <div className={styles.tributes}>
               <p>
                 Tagline: <span>{movie?.tagline}</span>
