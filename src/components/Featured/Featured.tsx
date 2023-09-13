@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import styles from './Featured.module.scss';
-import { Link } from 'react-router-dom';
 import { MovieContext } from '../../api/movie-api';
 import Card from '../Card/Card';
+import Roller from '../Roller/Roller';
 
 const Featured = () => {
   const movieContext = useContext(MovieContext);
 
   if (!movieContext || !movieContext.movies) {
-    return <div>Loading...</div>;
+    return <Roller />;
   }
   const movies = movieContext.movies;
   const firstTwelve = movies.slice(0, 10);
@@ -17,7 +17,6 @@ const Featured = () => {
     <section className={styles.feature_container}>
       <div className={styles.heading}>
         <h2>Featured Movie</h2>
-        <Link to='/feature'>See More </Link>
       </div>
       <div className={styles.movie_deck}>
         {firstTwelve.map((movie) => {
