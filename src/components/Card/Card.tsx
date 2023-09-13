@@ -67,7 +67,7 @@ const Card: React.FC<CardProps> = ({
 
 
   return (
-    <Link to={`./movies/${id}`} data-testid: movie-card>
+    <Link to={`./movies/${id}`} data-testid= 'movie-card'>
       <m.div 
               initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -127,8 +127,8 @@ const Card: React.FC<CardProps> = ({
           </svg>
         </div>
         <div className={styles.loc}>
-          <p data-testid: movie-release-date>{utcDate.toUTCString()}</p>
-          <h3 data-testid: movie-title>{original_title}</h3>
+          <p data-testid= 'movie-release-date'>{utcDate.toUTCString()}</p>
+          <h3 data-testid= 'movie-title'>{original_title}</h3>
           <div className={styles.rating}>
             <div className={styles.rate_tab}>
               <img src={imdb} alt='imdb icon' />
