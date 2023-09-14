@@ -54,7 +54,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
                 import.meta.env.VITE_DB_KEY
               }`
             );
-            movie.imdb_id = imdbResponse.data.imdb_id || null;
+            movie.imdb_id = imdbResponse.data.movie_id || null;
             return movie;
           })
         );
