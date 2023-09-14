@@ -68,7 +68,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       });
   }, []);
 
-  console.log(movies);
+  // console.log(movies);
 
   if (movies === null && searchMovies === null) {
     return <Spinner />;
