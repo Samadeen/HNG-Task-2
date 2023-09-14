@@ -97,7 +97,7 @@ const Feature = () => {
                   release_date={movie.release_date}
                   vote_average={movie.vote_average}
                   key={movie.id}
-                  id={movie.imdb_id}
+                  id={movie.id}
                 />
               );
             })
