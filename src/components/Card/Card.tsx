@@ -61,7 +61,7 @@ const Card: React.FC<CardProps> = ({
   genreNames.sort();
 
   const date = new Date(release_date);
-  const utcDate = new Date(date);
+  const utcDate = new Date(date).toUTCString();
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
@@ -127,7 +127,7 @@ const Card: React.FC<CardProps> = ({
           </svg>
         </div>
         <div className={styles.loc}>
-          <p data-testid= 'movie-release-date'>{utcDate.toUTCString()}</p>
+          <p data-testid= 'movie-release-date'>{utcDate}</p>
           <h3 data-testid= 'movie-title'>{original_title}</h3>
           <div className={styles.rating}>
             <div className={styles.rate_tab}>
