@@ -60,8 +60,8 @@ const Card: React.FC<CardProps> = ({
   // Sort genre names alphabetically
   genreNames.sort();
 
-  const date = new Date(release_date);
-  const utcDate = new Date(date).toUTCString();
+  const localDate = new Date(release_date); // Assuming midnight
+  const utcDate = localDate.toISOString();
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
