@@ -24,8 +24,6 @@ const Hero = () => {
   const firstSix = movies.slice(0, 6);
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
-  console.log(firstSix[2].backdrop_path);
-
   const randomRating = Math.floor(Math.random() * 26) + 75;
   const randomRatingPercentage = Math.floor(Math.random() * 26) + 75;
 
