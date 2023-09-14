@@ -3,7 +3,7 @@ import imdb from '../../assets/imdb.svg';
 import tomato from '../../assets/tomato.svg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {motion as m} from 'framer-motion'
+import { motion as m } from 'framer-motion';
 
 interface CardProps {
   poster_path: string;
@@ -11,7 +11,7 @@ interface CardProps {
   genre_ids: number[];
   vote_average: number;
   release_date: string;
-  id: string | null;
+  id: number | null;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -65,16 +65,20 @@ const Card: React.FC<CardProps> = ({
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
-
   return (
-    <Link to={`./movies/${id}`} data-testid= 'movie-card'>
-      <m.div 
-              initial={{ opacity: 0, y: 100 }}
+    <Link to={`./movies/${id}`} data-testid='movie-card'>
+      <m.div
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.3 }}
-       className={styles.card_container}>
+        className={styles.card_container}
+      >
         <div className={styles.images}>
-          <img src={imagePath + poster_path} alt={original_title} data-testid: movie-poster />
+          <img
+            src={imagePath + poster_path}
+            alt={original_title}
+            data-testid='movie-poster'
+          />
           <svg
             onClick={toggleHandler}
             width='30'
@@ -127,8 +131,8 @@ const Card: React.FC<CardProps> = ({
           </svg>
         </div>
         <div className={styles.loc}>
-          <p data-testid= 'movie-release-date'>{utcDate}</p>
-          <h3 data-testid= 'movie-title'>{original_title}</h3>
+          <p data-testid='movie-release-date'>{utcDate}</p>
+          <h3 data-testid='movie-title'>{original_title}</h3>
           <div className={styles.rating}>
             <div className={styles.rate_tab}>
               <img src={imdb} alt='imdb icon' />
