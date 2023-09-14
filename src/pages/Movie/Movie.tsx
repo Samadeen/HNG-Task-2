@@ -176,7 +176,7 @@ const Movie = () => {
           <span></span>
           <h2>PG-13</h2>
           <span></span>
-          <h2 data-testid='movie-runtime'>{movie?.runtime} mins</h2>
+          <h2 data-testid='movie-runtime'>{movie?.runtime}</h2>
           <div className={styles.genre}>
             {movie?.genres.map((genre, idx) => {
               return <h3 key={idx}>{genre.name}</h3>;
