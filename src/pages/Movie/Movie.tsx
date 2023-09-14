@@ -91,8 +91,6 @@ const Movie = () => {
       });
   }, [imdb_id]);
 
-  console.log(movie);
-
   if (!movieContext || !movieContext.movies) {
     return <Spinner />;
   }
@@ -104,8 +102,14 @@ const Movie = () => {
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
 
-  const date = new Date(movie?.release_date);
-  const utcDate = new Date(date);
+  let utcDate = '';
+  if (movie && movie.release_date) {
+    const date = new Date(movie.release_date);
+    if (!isNaN(date.getTime())) {
+      utcDate = date.toISOString();
+    }
+  }
+  console.log(utcDate);
 
   return (
     <section className={styles.movie_container}>
@@ -172,7 +176,7 @@ const Movie = () => {
         >
           <h1 data-testid='movie-title'>{movie?.original_title}</h1>
           <span></span>
-          <h2 data-testid='movie-release-date'>{utcDate.toUTCString()}</h2>
+          <h2 data-testid='movie-release-date'>{utcDate}</h2>
           <span></span>
           <h2>PG-13</h2>
           <span></span>
